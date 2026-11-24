@@ -20,6 +20,9 @@
     "wagmi": "3.6.16"
   },
   "packageManager": "yarn@4.13.0",
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24"
+  },
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@tailwindcss/postcss": "4.3.0",

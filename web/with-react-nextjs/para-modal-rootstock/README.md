@@ -8,7 +8,7 @@ A Next.js app that uses the [Para](https://www.getpara.com/) React SDK on Rootst
 
 ## Requirements
 
-- Node.js 20.9 or newer
+- Node.js 20.19+, 22.13+ or 24+
 - Yarn 4 (`corepack enable` picks up the version in `package.json`)
 - A Para API key from the [Para developer portal](https://developer.getpara.com/)
 - Optional: a WalletConnect project id from [Reown](https://cloud.reown.com/) to connect wallets through WalletConnect
