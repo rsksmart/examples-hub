@@ -8,8 +8,8 @@ import { Header } from "@/components/layout/Header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Para Modal Example",
-  description: "Simple Para Modal integration with message signing",
+  title: "Para + Rootstock Example",
+  description: "Para Modal on Rootstock Testnet with tRBTC and tRIF balances and message signing",
 };
 
 export default function RootLayout({
