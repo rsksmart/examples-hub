@@ -1,54 +1,60 @@
-# Para Modal Rootstock
+# Para Modal on Rootstock
 
-This example demonstrates how to integrate Para Modal with Rootstock in a Next.js application. It showcases wallet connection and message signing capabilities for popular EVM wallets like MetaMask and Rainbow through Para's React SDK.
+A Next.js app that uses the [Para](https://www.getpara.com/) React SDK on Rootstock Testnet (chain id 31). It shows how to:
+
+- open the Para modal and sign in with email, phone, Google, MetaMask or WalletConnect,
+- show tRBTC and tRIF balances in the modal by registering Rootstock Testnet as a custom network,
+- sign a message with the connected wallet.
+
+## Requirements
+
+- Node.js 20.19+, 22.13+ or 24+
+- Yarn 4 (`corepack enable` picks up the version in `package.json`)
+- A Para API key from the [Para developer portal](https://developer.getpara.com/)
+- Optional: a WalletConnect project id from [Reown](https://cloud.reown.com/) to connect wallets through WalletConnect
 
 ## Setup
 
-### Environment Variables
-
-Create a `.env.local` file in the root directory:
-
-```env
-NEXT_PUBLIC_PARA_API_KEY=your_para_api_key
-```
-
-### Installation
-
-Install dependencies using your preferred package manager:
+Copy the example environment file and fill in your keys:
 
 ```bash
-# npm
-npm install
-
-# yarn
-yarn install
-
-# pnpm
-pnpm install
+cp .env.example .env.local
 ```
 
-## Key Dependencies
+| Variable | Required | Description |
+| --- | --- | --- |
+| `NEXT_PUBLIC_PARA_API_KEY` | yes | Para API key |
+| `NEXT_PUBLIC_PARA_ENVIRONMENT` | no | `BETA` (default) or `PROD` |
+| `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID` | no | WalletConnect project id |
 
-- `@getpara/evm-wallet-connectors` (v2.0.0-alpha.26) - EVM wallet connectors for Para
-- `@getpara/react-sdk` (v2.0.0-alpha.26) - Para React SDK for wallet integration
-- `@tanstack/react-query` (v5.81.2) - Data fetching and state management
-- `viem` (v2.31.4) - TypeScript interface for Ethereum
-- `wagmi` (v2.15.6) - React hooks for Ethereum
-- `next` (v15.1.5) - React framework
-- `react` (v19.0.0) - React library
+Install and run:
 
-## Key Files
+```bash
+yarn install
+yarn dev
+```
 
-- `src/context/ParaProvider.tsx` - Para SDK React context provider
-- `src/components/ui/ConnectWalletCard.tsx` - Wallet connection interface
-- `src/components/ui/SignMessageForm.tsx` - Message signing form component
-- `src/config/constants.ts` - Configuration constants
+Open http://localhost:3000.
 
-## Learn More
+## Key files
 
-- [Para Documentation](https://docs.getpara.com)
-- [Para Website](https://getpara.com)
-- [Para Developer Portal](https://developer.getpara.com)
-- [Wagmi Documentation](https://wagmi.sh)
-- [Viem Documentation](https://viem.sh)
-- [Next.js Documentation](https://nextjs.org/docs)
+- `src/context/Providers.tsx`: Para provider setup, the Rootstock Testnet custom network, the tRBTC and tRIF assets, and the modal options
+- `src/config/constants.ts`: environment variables
+- `src/app/page.tsx`: connect and sign-message flow
+- `src/components/layout/Header.tsx`: connect button
+
+## Rootstock Testnet
+
+| | |
+| --- | --- |
+| Chain id | 31 |
+| RPC | https://public-node.testnet.rsk.co |
+| Explorer | https://explorer.testnet.rootstock.io |
+| tRIF token | `0x19f64674d8a5b4e652319f5e239efd3bc969a1fe` |
+| Faucet | https://faucet.rootstock.io |
+
+## Learn more
+
+- [Onboard using Para SDK (Rootstock Developer Portal)](https://dev.rootstock.io/use-cases/onboarding-ux/para/)
+- [Rootstock integration walkthrough (Para docs)](https://docs.getpara.com/v3/walkthroughs/rootstock)
+- [Para React SDK docs](https://docs.getpara.com/)

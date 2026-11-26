@@ -2,7 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ParaProvider as ParaSDKProvider } from "@getpara/react-sdk";
-import { API_KEY, ENVIRONMENT } from "@/config/constants";
+import { API_KEY, ENVIRONMENT, WALLET_CONNECT_PROJECT_ID } from "@/config/constants";
 import { rootstockTestnet } from "wagmi/chains";
 
 const queryClient = new QueryClient();
@@ -12,12 +12,16 @@ const ROOTSTOCK_TESTNET = {
   evmChainId: '31' as const,
   nativeTokenSymbol: 'tRBTC',
   logoUrl: 'https://raw.githubusercontent.com/rsksmart/rsk-contract-metadata/refs/heads/master/images/rootstock-orange.png',
-  rpcUrl: 'https://public-node.testnet.rsk.co',
+  rpc: {
+    httpUrls: ['https://public-node.testnet.rsk.co'],
+  },
+  // The SDK's CustomNetwork type intersects `explorer?: string` with NetworkMetadata's object form,
+  // so no value satisfies both; the modal reads the object form at runtime.
   explorer: {
     name: 'Rootstock Testnet Explorer',
     url: 'https://explorer.testnet.rootstock.io',
     txUrlFormat: 'https://explorer.testnet.rootstock.io/tx/{HASH}',
-  },
+  } as never,
   isTestnet: true,
 };
 
@@ -42,10 +46,10 @@ export function Providers({
             },
           },
           walletConnect: {
-            projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || "",
+            projectId: WALLET_CONNECT_PROJECT_ID,
           },
         }}
-        config={{ appName: "Para Modal + EVM Wallets Example" }}
+        config={{ appName: "Para + Rootstock Example" }}
         paraModalConfig={{
           balances:{
             displayType: 'AGGREGATED',
@@ -86,10 +90,6 @@ export function Providers({
           theme: {
             foregroundColor: "#222222",
             backgroundColor: "#FFFFFF",
-            accentColor: "#888888",
-            darkForegroundColor: "#EEEEEE",
-            darkBackgroundColor: "#111111",
-            darkAccentColor: "#AAAAAA",
             mode: "light",
             borderRadius: "none",
             font: "Inter",
